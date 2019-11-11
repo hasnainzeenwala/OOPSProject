@@ -21,14 +21,15 @@ public class BookCab extends JFrame implements ActionListener{
 	private JLabel title;
 	private JLabel pickUp;
 	private JLabel dropOff;
-    private JComboBox pick; 
-    private JComboBox drop;
-    private String walletBalance;
-    private JLabel balance;
-    private JButton bookCab;
-    private JButton addMoney;
-    private String user;
-    private String locations[] = {"Mahalaxmi Nagar", "Khatiwala Tank", "Sapna Sangeeta Road", "Manik Bagh Road"};
+    	private JComboBox pick; 
+    	private JComboBox drop;
+    	private String walletBalance;
+    	private JLabel balance;
+    	private JButton bookCab;
+    	private JButton addMoney;
+    	private String user;
+	final int noLocations = 6;
+    	private String locations[] = {"Mahalaxmi Nagar", "Khatiwala Tank", "Sapna Sangeeta Road", "Manik Bagh Road", "Saket Nagar", "Thumkunta"};
 	
 	public BookCab(String userName) {
 		user = userName;
@@ -123,6 +124,27 @@ public class BookCab extends JFrame implements ActionListener{
 			this.setVisible(false);
 			AddMoney addMoneyWindow = new AddMoney(user);
 			addMoneyWindow.setVisible(true);
+		}
+		if(e.getSource()==bookCab) {
+			String pickUpLocation = (String)pick.getSelectedItem();
+			String dropOffLocation = (String)drop.getSelectedItem();
+			int pickUpIndex=0, dropOffIndex=0;
+			for(int i=0; i<noLocations; i++) {
+				if(locations[i].equals(pickUpLocation)) {
+					pickUpIndex = i;
+				}
+				if(locations[i].equals(dropOffLocation)) {
+					dropOffIndex = i;
+				}
+			}
+			if(pickUpIndex != dropOffIndex) {
+				this.setVisible(false);
+				CabBooked cabBookedFrame = new CabBooked("Jhaveri", "4.8");
+				cabBookedFrame.setVisible(true);
+			}
+			else {
+				 JOptionPane.showMessageDialog(this, "Please enter valid pick up and drop off locations!");
+			}
 		}
 		
 	}
