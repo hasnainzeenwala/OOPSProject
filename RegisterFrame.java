@@ -30,13 +30,13 @@ class RegisterFrame
     private JComboBox month; 
     private JComboBox year; 
     private JLabel add; 
-    private JTextArea tadd; 
+    private JPasswordField tadd; 
     private JCheckBox term; 
     private JButton sub; 
     private JButton reset; 
     private JTextArea tout; 
     private JLabel res; 
-    private JTextArea resadd; 
+    private JPasswordField resadd; 
   
     private String dates[] 
         = { "1", "2", "3", "4", "5", 
@@ -162,17 +162,15 @@ class RegisterFrame
         year.setLocation(520, 300); 
         c.add(year); 
   
-        add = new JLabel("Address"); 
+        add = new JLabel("Password"); 
         add.setFont(new Font("Arial", Font.PLAIN, 20)); 
         add.setSize(100, 20); 
         add.setLocation(300, 350); 
         c.add(add); 
   
-        tadd = new JTextArea(); 
-        tadd.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        tadd.setSize(200, 75); 
-        tadd.setLocation(400, 350); 
-        tadd.setLineWrap(true); 
+        tadd = new JPasswordField(); 
+        tadd.setSize(200, 30); 
+        tadd.setLocation(400, 350);  
         c.add(tadd); 
   
         term = new JCheckBox("Accept Terms And Conditions."); 
@@ -205,16 +203,9 @@ class RegisterFrame
   
         res = new JLabel(""); 
         res.setFont(new Font("Arial", Font.PLAIN, 20)); 
-        res.setSize(500, 25); 
-        res.setLocation(300, 550); 
+        res.setSize(700, 25); 
+        res.setLocation(100, 550); 
         c.add(res); 
-  
-        resadd = new JTextArea(); 
-        resadd.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        resadd.setSize(200, 75); 
-        resadd.setLocation(580, 175); 
-        resadd.setLineWrap(true); 
-        //c.add(resadd); 
   
         setVisible(true); 
     } 
@@ -225,11 +216,11 @@ class RegisterFrame
     public void actionPerformed(ActionEvent e) 
     { 
         if (e.getSource() == sub) { 
-            if (term.isSelected()) { 
+            if (term.isSelected() && !(tname.getText().trim().isEmpty()) && !(temail.getText().trim().isEmpty()) && !(String.valueOf(tadd.getPassword()).trim().isEmpty())) { 
                 String user = tname.getText();
                 String mobile=tmno.getText(); 
                 String email=temail.getText();
-                String pass = tadd.getText(); 
+                String pass = String.valueOf(tadd.getPassword()); 
                 try {
     				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cab", "root", "password");
     			    PreparedStatement stmt=(PreparedStatement) con.prepareStatement("INSERT INTO userdetails (Username,Password,Mobile,Email) VALUES(?,?,?,?)");
@@ -246,11 +237,9 @@ class RegisterFrame
     			}
                 res.setText("Registration Successfully.."); 
             }
-            else { 
-                tout.setText(""); 
-                resadd.setText(""); 
+             else { 
                 res.setText("Please accept the"
-                            + " terms & conditions.."); 
+                            + " terms & conditions, and don't leave any field blank"); 
             } 
         } 
   
