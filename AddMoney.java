@@ -59,6 +59,11 @@ public class AddMoney extends JFrame implements ActionListener{
 		if(e.getSource() == addMoney) {
 			if(String.valueOf(cvvNo.getPassword()).equals("123"))
 			{
+				try{
+					int j = Inter.parseInt(cardNo.getText());
+				try{
+					int i = Integer.parseInt(amount.getText());
+				
 				 try {
 	    				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/cab", "root", "password");
 	    			    PreparedStatement stmt=(PreparedStatement) con.prepareStatement("UPDATE userdetails SET Balance=Balance + ? WHERE UserName=?");
@@ -75,6 +80,14 @@ public class AddMoney extends JFrame implements ActionListener{
 	    				// TODO Auto-generated catch block
 	    				e1.printStackTrace();
 	    			}
+				}
+				catch (NumberFormatException e2){
+					JOptionPane.showMessageDialog(this, "Please enter a valid Amount");
+				}
+				}
+				catch (NumberFormatException e3){
+					JOptionPane.showMessageDialog(this, "Please enter a valid Card Number!");
+				}
 			
 			}
 			else {
