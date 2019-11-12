@@ -21,7 +21,10 @@ public class CabBooked extends JFrame implements ActionListener{
 	JLabel approxFareL;
 	JLabel ratingL;
 	JButton done = new JButton("Done!");
+	double oldRating; 
 	public CabBooked(String userName, String driverName, double rating, int tripFare) {
+		
+		oldRating = Double.parseDouble(rating);
 		
 		container.setLayout(null);
 		setBounds(10, 10, 500, 400);
@@ -73,7 +76,11 @@ public class CabBooked extends JFrame implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==done) {
-			System.exit(0);
+			if(e.getSource()==done) {
+			RateDriver newRateDriverFrame = new RateDriver("Mitta", oldRating);
+			this.setVisible(false);
+			newRateDriverFrame.setVisible(true);
+			}
 		}
 		
 	}
