@@ -32,12 +32,18 @@ public class BookCab extends JFrame implements ActionListener{
     	private String user;
     	private String driver;
     	private double rating;
-    	
+    	int fareArray[];
+	fareArray = new int[100];
     	
 	final int noLocations = 6;
     	private String locations[] = {"Mahalaxmi Nagar", "Khatiwala Tank", "Sapna Sangeeta Road", "Manik Bagh Road", "Saket Nagar", "Thumkunta"};
 	
 	public BookCab(String userName) {
+		
+		for(int i=0; i<noLocations; i++){
+			fareArray[i] = 300 + 50*i;
+		}
+		
 		user = userName;
 		
 		setLayoutManager();
@@ -145,7 +151,7 @@ public class BookCab extends JFrame implements ActionListener{
 					dropOffIndex = i;
 				}
 			}
-			int tripFare =400;
+			int tripFare = fareArray[pickUpIndex];
 			int success=0;
 			int walletBalanceAmount = Integer.parseInt(walletBalance);
 			System.out.println(walletBalanceAmount);
