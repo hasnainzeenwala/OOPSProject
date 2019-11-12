@@ -226,7 +226,8 @@ class RegisterFrame
     public void actionPerformed(ActionEvent e) 
     { 
         if (e.getSource() == sub) { 
-            if (term.isSelected() && !(tname.getText().trim().isEmpty()) && !(temail.getText().trim().isEmpty()) && !(String.valueOf(tadd.getPassword()).trim().isEmpty())) { 
+            if (term.isSelected() && !(tname.getText().trim().isEmpty()) && !(temail.getText().trim().isEmpty()) && !(String.valueOf(tadd.getPassword()).trim().isEmpty())
+                && temail.getText().contains("@")) { 
                 
             	String user = tname.getText();
                 String mobile=tmno.getText(); 
@@ -251,6 +252,9 @@ class RegisterFrame
     			}
                 
                 
+            }
+            else if (!(temail.getText().contains("@"))){
+                JOptionPane.showMessageDialog(this, "Please enter a Valid Email Address!");
             }
              else { 
                 res.setText("Please accept the"
