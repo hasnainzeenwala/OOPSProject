@@ -60,7 +60,7 @@ public class AddMoney extends JFrame implements ActionListener{
 			if(String.valueOf(cvvNo.getPassword()).equals("123"))
 			{
 				try{
-					int j = Inter.parseInt(cardNo.getText());
+					int j = Integer.parseInt(cardNo.getText());
 				try{
 					int i = Integer.parseInt(amount.getText());
 				
